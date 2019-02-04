@@ -33,6 +33,12 @@ lr = LinearRegression(labelCol='Yearly Amount Spent')
 lrModel = lr.fit(train_data)
 print("Coefficients: {} Intercept: {}".format(lrModel.coefficients,lrModel.intercept))
 
+#Training Summary 
+trainingSummary = lrModel.summary
+trainingSummary.residuals.show()
+print("RMSE: {}".format(trainingSummary.rootMeanSquaredError))
+print("r2: {}".format(trainingSummary.r2))
+
 # Prediction
 unlabeled_data = test_data.select('features')
 predictions = lrModel.transform(unlabeled_data)
